@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+
+<head>
+    <title>Groupes </title>
+    <style>
+        .card:hover {
+            transform: scale(1.03);
+            transition: all .2s ease-in-out;
+        }
+        .card-body {
+           background-color: rgba(215, 78, 47, 0.89) !important;
+            border-radius: 20px;
+
+    </style>
+</head>
+
+
+<main layout:fragment="content" >
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container">
+
+        </div>
+    </section>
+
+    <main id="main">
+
+        <section id="clients" class="clients section-bg p-3" >
+            <div class="container  w-75">
+                <div class="section-title">
+                    <h2>Liste des groupes</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <div th:if="${success}" class="alert alert-success" id="success">
+                            <p th:text="${success}">Success message goes here.</p>
+                        </div>
+                    </div>
+                    <form th:action="@{/groups/search}" action="#" method="post"
+                          class="row m-3 d-flex justify-content-center">
+                        <div class="form-group col-lg-3 text-center">
+                            <select id="searchType" name="searchType"
+                                    class="form-control rounded-5 shadow-sm text-center">
+                                <option value="all">Tous</option>
+                                <option value="nom">Nom</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-7 text-center">
+                            <input type="text" id="searchQuery" name="searchQuery"
+                                   class="form-control rounded-5 shadow-sm">
+                        </div>
+                        <div class="form-group col-lg-2  ">
+                            <a type="submit" class="btn bg-secondary rounded-5 shadow-sm shadow-sm"><i
+                                    class="bi bi-search"></i></a>
+                        </div>
+
+                    </form>
+
+                    <!-- Your form code here -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <th:block th:if="${not #lists.isEmpty(groupes)}">
+                                <p class="text-center"
+                                   th:text="'Nombre de contacts trouves : ' + ${groupes.size()}"></p>
+                                <div class="row">
+                                    <div th:each="groupe : ${groupes}" class="col-sm-12 col-md-6 col-lg-4 mb-4  ">
+                                        <div class="card shadow-lg rounded-5 ">
+                                            <div class="card-body">
+                                                <h4 class="card-title"
+                                                    th:text="${groupe.Nom}"></h4>
+                                                <p class="card-text">
+                                                    Nombre de contacts : <span
+                                                        th:text="${groupe.contacts.size()}"></span>
+                                                </p>
+                                                <div class="d-flex justify-content-center">
+                                                    <a th:href="@{/groups/edit/{id}(id=${groupe.id})}"
+                                                       class="btn btn-primary rounded-5 m-1"><i
+                                                            class="bi bi-pencil-square"></i></a>
+                                                    <a th:href="@{/groups/delete/{id}(id=${groupe.id})}"
+                                                       class="btn btn-danger rounded-5 m-1 delete"><i
+                                                            class="bi bi-calendar2-x-fill"></i></a>
+                                                    <a th:href="@{/groups/show/{id}(id=${groupe.id})}"
+                                                       class=" btn btn-success rounded-5 m-1"><i
+                                                            class="bi bi-file-earmark-fill"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4  ">
+                                        <div class="card shadow-lg rounded-5 text-center w-100 h-100 m-auto d-flex align-items-center justify-content-center">
+                                            <a th:href="@{/groups/add}"
+                                               class="btn btn-primary rounded-5 m-1 w-25"><i
+                                                    class="bi bi-plus-circle"></i></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </th:block>
+                            <th:block th:if="${#lists.isEmpty(groupes)}">
+                                <p class="text-center">Aucun contact trouve</p>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</main>
+</html>

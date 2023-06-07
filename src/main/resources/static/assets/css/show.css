@@ -1,0 +1,19 @@
+label {
+    font-weight: bold;
+    padding: 5px;
+    background: rgba(11, 94, 215, 0.82) !important;
+    box-shadow: black;
+    color: white;
+    border-radius: 20px;
+}
+p{
+    margin: 0!important;
+    padding: 5px !important;
+    font-weight: bold;
+}
+
+.form-group{
+    margin-bottom: 1rem;
+    display: flex;
+
+}

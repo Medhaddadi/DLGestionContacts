@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+
+<head>
+    <title>Creer group </title>
+    <style>
+        label{
+            font-weight: bold;
+            padding-right: 5px;
+        }
+        input ,select{
+            box-shadow: #47b2e4  !important;
+            border-radius: 3px 20px !important;
+            border: 1px solid #47b2e4 !important;
+
+        }
+        .card-body {
+            background-color: #0dcaf0 !important;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<main layout:fragment="content" >
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container">
+            <div class="row  text-center"
+                 data-aos="fade-up" data-aos-delay="200">
+                <h1>Groupe </h1>
+                <div class="d-flex justify-content-center">
+                    <a th:href="@{/contacts/add/}" class="btn-get-started scrollto">Ajouter Groupe</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main id="main">
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Creer noveau groupe </h2>
+                </div>
+                <div class="row">
+                    <div class="col mt-5 mt-lg-0 d-flex align-items-stretch">
+                        <form action="#" th:action="@{/groups/add}" th:object="${groupe}" method="post"
+                              role="form" class="php-email-form">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Nom</label>
+                                    <input type="text" th:field="*{Nom}" class="form-control" id="name" required>
+                                    <span class="text-danger" th:if="${#fields.hasErrors('Nom')}" th:errors="*{Nom}">Nom Error</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <th:block th:if="${not #lists.isEmpty(contacts)}">
+                                        <p class="text-center"
+                                           th:text="'Nombre de contacts trouves : ' + ${contacts.size()}"></p>
+                                        <div class="row">
+                                            <div th:each="contact : ${contacts}"
+                                                 class="col-sm-12 col-md-6 col-lg-4 mb-4  ">
+                                                <div class="card shadow-lg rounded-5 ">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title"
+                                                            th:text="${contact.Nom} + ' ' + ${contact.Prenom}"></h4>
+                                                        <p class="card-text">
+                                                            <span th:text="${contact.telephone1}"></span><br/>
+                                                            <span th:text="${contact.email_Personnel}"></span>
+                                                        </p>
+                                                        <div class="d-flex justify-content-center">
+                                                            <input type="checkbox"  name="contacts" th:value="${contact.id}" class="form-check-input">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-4 mb-4  ">
+                                                <div class="card shadow-lg rounded-5 text-center w-100 h-100 m-auto d-flex align-items-center justify-content-center">
+                                                    <a th:href="@{/contacts/add}"
+                                                       class="btn btn-primary rounded-5 m-1 w-25"><i
+                                                            class="bi bi-plus-circle"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </th:block>
+                                    <th:block th:if="${#lists.isEmpty(contacts)}">
+                                        <p class="text-center">Aucun contact trouve</p>
+                                    </th:block>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit">Creer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+    </main>
+</main>
+</html>

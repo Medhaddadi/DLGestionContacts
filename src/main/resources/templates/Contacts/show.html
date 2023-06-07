@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/app}">
+
+<head>
+    <title>Show Contact</title>
+    <link rel="stylesheet" href="/assets/css/show.css">
+
+</head>
+
+<main layout:fragment="content">
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container">
+            <div class="row  text-center"
+                 data-aos="fade-up" data-aos-delay="200">
+                <h1>Contact Details</h1>
+            </div>
+        </div>
+    </section>
+
+    <main id="main">
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Contact Information</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col mt-5 mt-lg-0">
+                        <div class="php-email-form rounded-5 shadow-lg">
+                            <div class="row">
+                                <div class="form-group col-md-6 ">
+                                    <label for="name">Nom :</label>
+                                    <p th:text="${contact.Nom}"></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="prenom">Prenom :</label>
+                                    <p th:text="${contact.Prenom}"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="telephone1">Telephone1 :</label>
+                                    <p th:text="${contact.Telephone1}"></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="telephone2">Telephone2 :</label>
+                                    <p th:text="${contact.Telephone2}"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="email_personnel">Email Personnel :</label>
+                                    <p th:text="${contact.Email_Personnel}"></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Email_Professionnel">Email Professionnel :</label>
+                                    <p th:text="${contact.Email_Professionnel}"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="Adresse">Adresse :</label>
+                                    <p th:text="${contact.Adresse}"></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Genre">Genre :</label>
+                                    <p th:text="${contact.Genre}"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="createdAt">Created at :</label>
+                                    <p th:text="${contact.createdAt}"></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="updatedAt">Modefied at :</label>
+                                    <p th:text="${contact.updatedAt}"></p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a th:href="@{/contacts/edit/{id}(id=${contact.id})}"
+                                   class="btn btn-primary rounded-5 m-1 w-25"><i
+                                        class="bi bi-pencil-square"></i></a>
+                                <a th:href="@{/contacts/delete/{id}(id=${contact.id})}"
+                                   class="btn btn-danger rounded-5 m-1 w-25"><i
+                                        class="bi bi-calendar2-x-fill"></i></a>
+
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </section>
+    </main>
+</main>
+</html>
